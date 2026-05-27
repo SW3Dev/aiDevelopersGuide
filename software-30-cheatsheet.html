@@ -7,21 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --surface2: #1e1e1e;
-    --border: #2a2a2a;
-    --border-bright: #3a3a3a;
-    --text: #e8e8e8;
-    --text-muted: #888;
-    --text-dim: #555;
-    --accent: #00ff88;
-    --accent-dim: rgba(0,255,136,0.08);
-    --accent-mid: rgba(0,255,136,0.15);
-    --warn: #ff6b35;
-    --warn-dim: rgba(255,107,53,0.08);
-    --info: #4d9fff;
-    --info-dim: rgba(77,159,255,0.08);
+    --bg: #faf8f4;
+    --surface: #fffefb;
+    --surface2: #f3f0ea;
+    --border: #e5dfd4;
+    --border-bright: #cfc8ba;
+    --text: #2c2416;
+    --text-muted: #7a6e5f;
+    --text-dim: #b0a898;
+    --accent: #4f6d8a;
+    --accent-dim: rgba(79,109,138,0.08);
+    --accent-mid: rgba(79,109,138,0.15);
+    --warn: #b45309;
+    --warn-dim: rgba(180,83,9,0.08);
+    --info: #3d6b6b;
+    --info-dim: rgba(61,107,107,0.08);
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'IBM Plex Sans', sans-serif;
   }
@@ -474,7 +474,7 @@
 
     <div class="card">
       <div class="phase-badge phase-1">① Audit</div>
-      <div class="card-title"><span class="dot dot-green"></span>Menu Gen test — part A (kill)</div>
+      <div class="card-title"><span class="dot dot-green"></span>go/no-go test — part A (kill)</div>
       <ul class="checklist" id="cl-audit">
         <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text"><span class="tag tag-kill">kill</span>Could this be replaced by one multimodal prompt + 1–2 tool calls or an MCP?</span></li>
         <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Is this Software 1.0 plumbing — an orchestration layer, API wrapper, or UI shell — around something the model now does natively?</span></li>
@@ -484,7 +484,7 @@
         <div class="test-a"><span class="yes">Stop or pivot.</span> You are building plumbing the next release will absorb.</div>
       </div>
       <hr style="margin:12px 0">
-      <div class="card-title"><span class="dot dot-green"></span>Menu Gen test — part B (build)</div>
+      <div class="card-title"><span class="dot dot-green"></span>go/no-go test — part B (build)</div>
       <ul class="checklist" id="cl-build">
         <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text"><span class="tag tag-build">build</span>Does this only exist because of Software 3.0 — genuinely impossible before LLMs?</span></li>
         <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Does it embed genuine domain expertise or proprietary context the model can't replicate alone?</span></li>
