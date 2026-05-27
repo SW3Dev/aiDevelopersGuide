@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software 3.0 Developer Cheatsheet</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: #2a2a2a;
+    --border-bright: #3a3a3a;
+    --text: #e8e8e8;
+    --text-muted: #888;
+    --text-dim: #555;
+    --accent: #00ff88;
+    --accent-dim: rgba(0,255,136,0.08);
+    --accent-mid: rgba(0,255,136,0.15);
+    --warn: #ff6b35;
+    --warn-dim: rgba(255,107,53,0.08);
+    --info: #4d9fff;
+    --info-dim: rgba(77,159,255,0.08);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 32px 24px 64px;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .header-left {}
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  .progress-block {
+    text-align: right;
+  }
+
+  .progress-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .progress-bar-wrap {
+    width: 160px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  /* Grid layout */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+
+  @media (max-width: 700px) {
+    .grid, .grid-3 { grid-template-columns: 1fr; }
+    .span-2, .span-3 { grid-column: span 1; }
+  }
+
+  /* Section header */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 32px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-green  { background: var(--accent); }
+  .dot-orange { background: var(--warn); }
+  .dot-blue   { background: var(--info); }
+  .dot-gray   { background: var(--text-dim); }
+
+  /* Checklist items */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    cursor: pointer;
+    padding: 5px 7px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .checklist li:hover {
+    background: var(--surface2);
+    border-color: var(--border);
+  }
+
+  .checklist li.checked {
+    opacity: 0.45;
+  }
+
+  .check-box {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--border-bright);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .checklist li.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .check-mark {
+    display: none;
+    width: 8px;
+    height: 8px;
+    stroke: #000;
+  }
+
+  .checklist li.checked .check-mark { display: block; }
+
+  .check-text {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .checklist li.checked .check-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+
+  .check-text .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 3px;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-kill  { background: rgba(255,107,53,0.15); color: var(--warn); }
+  .tag-build { background: rgba(0,255,136,0.12);  color: var(--accent); }
+  .tag-now   { background: rgba(77,159,255,0.12); color: var(--info); }
+
+  /* Test boxes */
+  .test-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-top: 12px;
+  }
+
+  .test-block.warn { border-left-color: var(--warn); }
+  .test-block.info { border-left-color: var(--info); }
+
+  .test-q {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .test-a {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .test-a span.yes { color: var(--warn); font-weight: 500; }
+  .test-a span.no  { color: var(--accent); font-weight: 500; }
+
+  /* Quick ref table */
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .ref-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ref-table tr:last-child { border-bottom: none; }
+
+  .ref-table td {
+    padding: 8px 10px;
+    vertical-align: top;
+  }
+
+  .ref-table td:first-child {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    width: 38%;
+    padding-right: 16px;
+    white-space: nowrap;
+  }
+
+  .ref-table td:last-child {
+    font-family: var(--sans);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Phase badges */
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 99px;
+    margin-bottom: 10px;
+  }
+
+  .phase-1 { background: rgba(0,255,136,0.10); color: var(--accent); border: 1px solid rgba(0,255,136,0.2); }
+  .phase-2 { background: rgba(77,159,255,0.10); color: var(--info); border: 1px solid rgba(77,159,255,0.2); }
+  .phase-3 { background: rgba(255,107,53,0.10); color: var(--warn); border: 1px solid rgba(255,107,53,0.2); }
+  .phase-4 { background: rgba(180,130,255,0.10); color: #b482ff; border: 1px solid rgba(180,130,255,0.2); }
+
+  /* Divider */
+  hr { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+
+  /* Reset */
+  .reset-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .reset-btn:hover {
+    color: var(--text-muted);
+    border-color: var(--border-bright);
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: var(--sans);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer a { color: var(--text-dim); text-decoration: none; }
+
+  /* Flow row */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 0 4px;
+  }
+
+  .flow-step {
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1px solid;
+  }
+
+  .flow-arrow {
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  .flow-loop {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: var(--sans);
+    margin-left: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Developer Cheatsheet</div>
+      <h1>Software <span>3.0</span> Field Guide</h1>
+      <div class="subtitle">Based on Karpathy's framework for AI-native development · Tick items as you go</div>
+    </div>
+    <div class="progress-block">
+      <div class="progress-label">Session progress</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+      </div>
+      <div class="progress-count" id="prog-count">0 / 0 complete</div>
+      <button class="reset-btn" style="margin-top:8px" onclick="resetAll()">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- The cycle -->
+  <div class="section-label">The cycle</div>
+  <div class="card span-3">
+    <div class="flow-row">
+      <span class="flow-step phase-1">① Audit</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step phase-2">② Orient</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step phase-3">③ Build</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step phase-4">④ Stay Sharp</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-loop">↻ repeat at every model release</span>
+    </div>
+  </div>
+
+  <!-- Phase 1 + 2 -->
+  <div class="section-label">Before you build</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="phase-badge phase-1">① Audit</div>
+      <div class="card-title"><span class="dot dot-green"></span>Menu Gen test — part A (kill)</div>
+      <ul class="checklist" id="cl-audit">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text"><span class="tag tag-kill">kill</span>Could this be replaced by one multimodal prompt + 1–2 tool calls or an MCP?</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Is this Software 1.0 plumbing — an orchestration layer, API wrapper, or UI shell — around something the model now does natively?</span></li>
+      </ul>
+      <div class="test-block warn">
+        <div class="test-q">// if any answer is YES →</div>
+        <div class="test-a"><span class="yes">Stop or pivot.</span> You are building plumbing the next release will absorb.</div>
+      </div>
+      <hr style="margin:12px 0">
+      <div class="card-title"><span class="dot dot-green"></span>Menu Gen test — part B (build)</div>
+      <ul class="checklist" id="cl-build">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text"><span class="tag tag-build">build</span>Does this only exist because of Software 3.0 — genuinely impossible before LLMs?</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Does it embed genuine domain expertise or proprietary context the model can't replicate alone?</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Does it solve something the model alone cannot?</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Will it <em>still</em> pass both tests after the next model release?</span></li>
+      </ul>
+      <div class="test-block">
+        <div class="test-q">// if all answers are YES →</div>
+        <div class="test-a"><span class="no">Proceed.</span> This is worth building.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="phase-badge phase-2">② Orient</div>
+      <div class="card-title"><span class="dot dot-blue"></span>Finding your verifiable niche</div>
+      <ul class="checklist" id="cl-orient">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Listed the domains where I have genuine deep expertise</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Confirmed outputs are objectively verifiable: correct/incorrect, better/worse, faster/slower</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Checked: are frontier labs specifically applying RL to this niche? (If no → window is open)</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Mapped the RL environment: defined reward, penalty, and what "better" means concretely</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Validated niche with a well-prompted agent <em>before</em> committing to fine-tuning</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Written a clear thesis: what I'm building, why it passes the S3.0 test, what makes it defensible</span></li>
+      </ul>
+      <hr style="margin:12px 0">
+      <div class="card-title"><span class="dot dot-blue"></span>Knowledge brain set up <span style="font-weight:400;font-size:10px;color:var(--text-dim);letter-spacing:0;text-transform:none">&nbsp;— runs across all phases</span></div>
+      <ul class="checklist" id="cl-brain-setup">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Created a dedicated folder for strategy/knowledge documents</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Written an initial context prompt covering company, product, domain, and goals</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Generated foundational docs (market positioning, technical direction, opportunity map) as markdown</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Habit established: new ideas go through the brain before committing</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="section-label">During the build — Phase ③</div>
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="phase-badge phase-3">③ Build</div>
+      <div class="card-title"><span class="dot dot-orange"></span>Before handing off to an agent</div>
+      <ul class="checklist" id="cl-before">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Spec and plan written — "done" is defined before the agent starts</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Task is scoped tightly — one agent, one contained objective</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Pass/fail criteria defined — tests, expected outputs, observable behaviour</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Asked: <em>what is the text I copy-paste to the agent?</em> (Not a script for a human to run)</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="phase-badge phase-3">③ Build</div>
+      <div class="card-title"><span class="dot dot-orange"></span>While agents are running</div>
+      <ul class="checklist" id="cl-during">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Context window is clean — stale or bloated context actively removed</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Running ≤ 3–4 parallel agents (human review bandwidth, not a technical limit)</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Checking in regularly — not letting any agent run open-endedly</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Knowledge brain provided as context where domain relevance matters</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="phase-badge phase-3">③ Build</div>
+      <div class="card-title"><span class="dot dot-orange"></span>After — reviewing agent output</div>
+      <ul class="checklist" id="cl-after">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Reviewing output as a draft, not a deployment</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Checked for: bloat, excessive copy-paste, brittle abstractions, silent logic errors</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Unit tests and smoke tests pass</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">CI blockers in place — bad code cannot reach production automatically</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Agent-first infra -->
+  <div class="section-label">Agent-first infrastructure</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="phase-badge phase-3">③ Build</div>
+      <div class="card-title"><span class="dot dot-orange"></span>External-facing product</div>
+      <ul class="checklist" id="cl-external">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text"><span class="tag tag-now">llms.txt</span>Added to root — tells agents what the product does, how the API works, how to trust it</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Docs are agent-readable: clear structure, no assumed context, direct instruction format</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Core functionality exposed via MCP, clean API, or agent-compatible tool calls</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Asked: can an agent understand and use this within a single context window, without human translation?</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="phase-badge phase-3">③ Build</div>
+      <div class="card-title"><span class="dot dot-orange"></span>Internal tooling</div>
+      <ul class="checklist" id="cl-internal">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Human UI stripped where an agent, not a person, is the primary consumer</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Data structures are LLM-legible: descriptive field names, explicit schemas, no visual-layout dependency</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Internal docs written as agent briefs, not employee onboarding</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Agent-native benchmark passed: agent can complete primary workflow end-to-end, no human mediation</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Phase 4 + Quick ref -->
+  <div class="section-label">Staying sharp — Phase ④</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="phase-badge phase-4">④ Stay Sharp</div>
+      <div class="card-title"><span class="dot" style="background:#b482ff"></span>Understanding practice</div>
+      <ul class="checklist" id="cl-sharp">
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Knowledge brain is being actively fed — articles read → agent updates relevant sections</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Regularly asking the brain: "What do I know about X? What are the gaps? What should I read next?"</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Capable of evaluating agent output critically — know what "good" looks like in this domain</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Building for where capabilities will be in 3–6 months, not only today's baseline</span></li>
+        <li onclick="toggle(this)"><span class="check-box"><svg class="check-mark" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Phase 1 audit scheduled for next major model release</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-gray"></span>Key tests at a glance</div>
+      <table class="ref-table">
+        <tr><td>Kill test</td><td>Can one prompt + tool calls replace this?</td></tr>
+        <tr><td>Build test</td><td>Does this only exist because of LLMs?</td></tr>
+        <tr><td>Agent-native test</td><td>Can an agent deploy and use this without human translation?</td></tr>
+        <tr><td>Niche test</td><td>Domain expertise + verifiable outputs + no lab RL coverage?</td></tr>
+        <tr><td>Understanding test</td><td>Am I outsourcing execution or understanding?</td></tr>
+        <tr><td>Setup test</td><td>What's the text I copy-paste to my agent?</td></tr>
+        <tr><td>Direction test</td><td>Can I evaluate what the agent produced, and do I know what good looks like?</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Principles ref -->
+  <div class="section-label">Core principles — reference</div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P1 · New paradigm</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">Don't ask: "how do I use AI to do this faster?" Ask: "what computing paradigm does this problem belong to?"</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P2 · Verifiability is the moat</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">Domains with objectively measurable outputs support RL and fine-tuning. That's where durable advantages are built.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P3 · Everything is built for humans</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">Agents need sensors and actuators. Design clean data access and clean action paths — not human-facing UIs.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P4 · Outsource execution, not understanding</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">You can't be a good director without genuine domain understanding. That's the scarcest resource now.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P5 · Vibe coding has a ceiling</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">Production work needs agentic engineering: spec-first, structured review, tests, CI. 3–4 agents max you can review properly.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-bottom:6px">P6 · Ghosts, not animals</div>
+      <div style="font-family:var(--sans); font-size:12px; color:var(--text-muted); line-height:1.6">LLMs are statistical circuits, not intelligences. Expect jagged capability — highly capable in some areas, hard edges in others.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Based on Karpathy's Software 3.0 talks, 2025 · synthesised with Claude (Anthropic)</span>
+    <span>Tick items as you go · resets on button press · state is session-only</span>
+  </div>
+
+</div>
+
+<script>
+  function toggle(li) {
+    li.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.checklist li');
+    const done = document.querySelectorAll('.checklist li.checked');
+    const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+    document.getElementById('prog-bar').style.width = pct + '%';
+    document.getElementById('prog-count').textContent = done.length + ' / ' + all.length + ' complete';
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.checklist li.checked').forEach(li => li.classList.remove('checked'));
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
