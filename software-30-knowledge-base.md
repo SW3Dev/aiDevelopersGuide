@@ -1,5 +1,5 @@
 # KNOWLEDGE BASE: Software 3.0 Developer Framework
-<!-- kb:domain=ai-development kb:source=karpathy-talks-2025 kb:type=framework kb:version=1.0 -->
+<!-- kb:domain=ai-development kb:source=karpathy-talks-2026 kb:type=framework kb:version=1.0 -->
 
 ## Document Purpose and Usage
 
@@ -11,7 +11,7 @@ This document is structured for retrieval by an AI assistant working on software
 - Helping a developer find a defensible niche for an AI product
 - Discussing the shift from traditional software to LLM-native development
 
-**Source:** Andrej Karpathy's public talks on Software 3.0 and agentic development (2025). Expanded with related best practices. Where a point originates with Karpathy directly, it is attributed. Expansions are noted as general guidance.
+**Source:** Andrej Karpathy's public talks on Software 3.0 and agentic development (2026). Expanded with related best practices. Where a point originates with Karpathy directly, it is attributed. Expansions are noted as general guidance.
 
 ---
 

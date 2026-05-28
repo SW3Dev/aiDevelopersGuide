@@ -155,4 +155,4 @@ LLMs are statistical circuits shaped by pre-training + RL. Not animal intelligen
 
 ---
 
-*Based on Karpathy's public talks on SW 3.0 and agentic development (2025). Living document — revisit at each model release.*
+*Based on Karpathy's public talks on SW 3.0 and agentic development (2026). Living document — revisit at each model release.*

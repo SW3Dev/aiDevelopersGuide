@@ -1,7 +1,7 @@
 # The Software 3.0 Developer Guide
 ### Abstract
 
-*The Software 3.0 Developer Guide* is a practical framework for software developers navigating the shift to AI-native development, synthesised from Andrej Karpathy's 2025 public talks and expanded with related best practices.
+*The Software 3.0 Developer Guide* is a practical framework for software developers navigating the shift to AI-native development, synthesised from Andrej Karpathy's 2026 public talks and expanded with related best practices.
 
 The guide's central argument is that software development has entered a new computing paradigm — Software 3.0 — in which the large language model is the interpreter, the prompt is the code, and the context window is the control lever. This is not an incremental improvement over existing practice; it is a categorical shift that renders a significant proportion of current applications obsolete and enables entirely new categories of software that could not have existed before.
 

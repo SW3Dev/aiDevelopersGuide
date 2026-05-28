@@ -5,7 +5,7 @@
 
 ## About This Document
 
-This guide synthesises the key insights, practical methods, and strategic framework drawn from Andrej Karpathy's recent public talks on the future of software development and AI — including a keynote delivered at a developer conference in early 2025 and related commentary. Karpathy co-founded OpenAI, built Tesla's Autopilot system, and coined the term "vibe coding." He is one of the most credible and widely followed voices on how AI is changing the practice of software development.
+This guide synthesises the key insights, practical methods, and strategic framework drawn from Andrej Karpathy's recent public talks on the future of software development and AI — including a keynote delivered at a developer conference in early 2026 and related commentary. Karpathy co-founded OpenAI, built Tesla's Autopilot system, and coined the term "vibe coding." He is one of the most credible and widely followed voices on how AI is changing the practice of software development.
 
 His central argument is that we are not in a faster version of software development. We are in a fundamentally different computing paradigm — one that renders a significant portion of current development practice obsolete and opens up entirely new categories of what can be built.
 
@@ -355,4 +355,4 @@ Phase 1: Audit → Phase 2: Orient → Phase 3: Build → Phase 4: Stay Sharp �
 
 ---
 
-*This document is based on Andrej Karpathy's public talks on Software 3.0 and agentic development (2025), synthesised and expanded in collaboration with Claude (Anthropic). It is intended as a living reference: the core paradigm shifts described here are durable, but specific tool recommendations and capability benchmarks should be revisited as the field evolves. Readers are encouraged to apply their own judgement, particularly where the guide expands beyond Karpathy's direct statements into broader best practice.*
+*This document is based on Andrej Karpathy's public talks on Software 3.0 and agentic development (2026), synthesised and expanded in collaboration with Claude (Anthropic). It is intended as a living reference: the core paradigm shifts described here are durable, but specific tool recommendations and capability benchmarks should be revisited as the field evolves. Readers are encouraged to apply their own judgement, particularly where the guide expands beyond Karpathy's direct statements into broader best practice.*
