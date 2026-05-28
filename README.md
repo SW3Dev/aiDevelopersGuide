@@ -33,6 +33,7 @@ The documents in this folder summarize and operationalize key ideas from Andrej 
 - `software-30-cheatsheet.html`
   - Visual interactive cheatsheet.
   - Best for quick browsing and workshop presentation.
+  - Live link: https://sw3dev.github.io/aiDevelopersGuide/software-30-cheatsheet.html
 
 ## Suggested Reading Path
 
