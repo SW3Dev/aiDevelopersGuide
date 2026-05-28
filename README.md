@@ -45,7 +45,7 @@ The documents in this folder summarize and operationalize key ideas from Andrej 
 ## Typical Usage Modes
 
 - Individual developer
-  - Use the full guide to align your mental model, then run projects through the concise checklist and Menu Gen tests.
+  - Use the full guide to align your mental model, then run projects through the concise checklist and go/no-go tests.
 
 - Engineering team lead
   - Use the concise guide in planning/review meetings and turn the framework into team standards.
