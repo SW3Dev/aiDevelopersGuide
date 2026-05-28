@@ -9,6 +9,6 @@ A step-change in agentic reliability around December 2025 marks the practical on
 
 The guide is organised around six core principles — including the primacy of verifiable niches, the limits of vibe coding, and the distinction between outsourcing execution and outsourcing understanding — and seven concrete methods covering project evaluation, niche identification, agent-first infrastructure design, and agentic engineering workflow. These are unified in a four-phase development cycle: Audit (evaluate whether a project should exist), Orient (identify a defensible niche), Build (construct agent-natively), and Stay Sharp (compound understanding over time). The cycle repeats at every significant model release.
 
-Companion tools include the Menu Gen test — a two-part kill/build filter for project evaluation — and the knowledge brain, a continuously maintained document system that serves as both strategic advisor and personal understanding repository across all four phases.
+Companion tools include a two-part kill/build filter for project evaluation (aka. a sanity test), and an LLM-friendly expert knowledge base that serves as both strategic advisor and personal understanding repository across all four phases.
 
-The guide is intended as a living reference. Its principles are written for durability; specific benchmarks should be revisited as the model frontier advances.
+This guide is intended as a living reference. Its principles are written for durability; specific benchmarks should be revisited as the model frontier advances.
