@@ -1,0 +1,14 @@
+# Software 3.0 Developer Guide - SW3Dev
+> A practical framework for AI-native software development based on Andrej Karpathy's 2026 talks. Covers the Software 3.0 paradigm shift, six core principles, six practical methods, and a four-phase development cycle for building in the agentic era. Published by SW3Dev.
+
+## Files
+
+- Full guide: software-30-developer-guide.md - Comprehensive reference (principles, methods, framework, glossary)
+- Concise guide: software-30-developer-guide-concise.md - Condensed fast-reference version
+- Knowledge base: software-30-knowledge-base.md - LLM-retrieval optimised version
+- Cheatsheet: software-30-cheatsheet.html - Interactive checklist for day-to-day use
+- Abstract: software-30-developer-guide-abstract.md - Summary for sharing and cataloguing
+
+## Key Concepts
+
+Software 3.0, Software 1.0, Software 2.0, agentic engineering, vibe coding, go/no-go test, knowledge brain, verifiable niche, agent-first infrastructure, sensors and actuators, jagged intelligence, December inflection, llms.txt
